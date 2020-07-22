@@ -20,3 +20,8 @@ Route::delete('posts/{post}', 'API\PostController@deletePost');
 // Route::group(['middleware' => 'auth:api'], function(){
 //   Route::post('posts', 'API\PostController@createPost');
 // });
+
+// Comment
+Route::post('posts/{post}/comments', 'API\CommentController@createComment');
+Route::patch('posts/{post}/comments/{comment}', 'API\CommentController@updateComment');
+Route::delete('posts/{post}/comments/{comment}', 'API\CommentController@deleteComment');

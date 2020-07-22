@@ -73,6 +73,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Post::class,
         ],
+        'comments' => [
+            'driver' => 'eloquent',
+            'model' => App\Comment::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
