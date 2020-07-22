@@ -1,3 +1,9 @@
+How to use: 
+1. Check database credential
+2. Run migration
+3. Start NPM
+
+
 Examination Rules:
 
 - Use Laravel PHP Framework
