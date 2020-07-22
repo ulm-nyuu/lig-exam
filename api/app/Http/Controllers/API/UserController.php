@@ -54,17 +54,35 @@ public $successStatus = 200;
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'c_password' => 'required|same:password',
+            'password_confirmation' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-                    return response()->json(['error'=>$validator->errors()], 401);
-                }
+          return response()->json([
+            "message" => "The given data was invalid.",
+            'errors'=> $validator->errors()
+          ], 422);
+        }
         $input = $request->all();
-                $input['password'] = bcrypt($input['password']);
-                $user = User::create($input);
-                $success['token'] =  $user->createToken('lig')->accessToken;
-                $success['name'] =  $user->name;
-        return response()->json([$success], $this-> successStatus);
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['name'] =  $user->name;
+        $success['email'] =  $user->email;
+        $success['updated_at'] =  $user->updated_at;
+        $success['created_at'] =  $user->created_at;
+        $success['id'] =  $user->id;
+        return response()->json($success,201);
+    }
+
+    /**
+     * Logout api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        if (Auth::check()) {
+           Auth::user()->AauthAcessToken()->delete();
+        }
     }
 
 }
