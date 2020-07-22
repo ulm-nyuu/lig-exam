@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
 
             $table->string('title', 100);
             $table->text('content');
-            $table->string('slug', 100);
+            $table->string('image', 255);
             $table->timestamp('updated_at', 0)->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
             $table->timestamp('created_at', 0)->useCurrent();
             $table->id();

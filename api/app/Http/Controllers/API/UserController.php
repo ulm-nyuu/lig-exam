@@ -27,7 +27,7 @@ public $successStatus = 200;
       }else{
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('lig')-> accessToken;
+            $success['token'] =  $user->createToken('lig')->accessToken;
             $success['token_type'] =  "bearer";
             $success['expires_at'] =  date("Y-m-d H:i:s",strtotime($user->createToken('lig')->token->expires_at));
             return response()->json($success, $this-> successStatus);
@@ -52,7 +52,7 @@ public $successStatus = 200;
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -67,8 +67,8 @@ public $successStatus = 200;
         $user = User::create($input);
         $success['name'] =  $user->name;
         $success['email'] =  $user->email;
-        $success['updated_at'] =  $user->updated_at;
-        $success['created_at'] =  $user->created_at;
+        $success['updated_at'] =  date("Y-m-d H:i:s",strtotime($user->updated_at));
+        $success['created_at'] =  date("Y-m-d H:i:s",strtotime($user->created_at));
         $success['id'] =  $user->id;
         return response()->json($success,201);
     }

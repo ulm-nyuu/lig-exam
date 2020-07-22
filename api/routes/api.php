@@ -15,7 +15,8 @@ Route::post('register', 'API\UserController@register');
 Route::post('logout', 'API\UserController@logout');
 // Post
 Route::post('posts', 'API\PostController@createPost');
-
-Route::group(['middleware' => 'auth:api'], function(){
-
-});
+Route::patch('posts/{post}', 'API\PostController@updatePost');
+Route::delete('posts/{post}', 'API\PostController@deletePost');
+// Route::group(['middleware' => 'auth:api'], function(){
+//   Route::post('posts', 'API\PostController@createPost');
+// });
